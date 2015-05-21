@@ -1,4 +1,5 @@
-﻿%% bae_conf.tex
+
+%% bare_conf.tex
 %% V1.3
 %% 2007/01/11
 %% by Michael Shell
@@ -8,12 +9,12 @@
 %%
 %% This is a skeleton file demonstrating the use of IEEEtran.cls
 %% (requires IEEEtran.cls version 1.7 or later) with an IEEE conference paper.
-%% 
+%%
 %% Support sites:
 %% http://www.michaelshell.org/tex/ieeetran/
 %% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
 %% and
-%% http://www.ieee.org
+%% http://www.ieee.org/
 
 %%*************************************************************************
 %% Legal Notice:
@@ -346,7 +347,6 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-
 \begin{document}
 %
 % paper title
@@ -381,8 +381,8 @@ Email: elif.ustundag@tubitak.gov.tr}
 Natural Sciences, \\
 Sabanci University, \\
 Istanbul, Turkey. \\
-e-mail: berrin@sabanciuniv.edu.}
-}
+e-mail: berrin@sabanciuniv.edu.}}
+
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -421,9 +421,8 @@ e-mail: berrin@sabanciuniv.edu.}
 
 \begin{abstract}
 %\boldmath
-
-Nowadays!!!!
-
+This paper presents a novel approach to BioHashing with fingerprint minutiae so that user specified secret key is never revealed from the smart card. 
+This approach takes the advantage of homomorphic encryption scheme to jointly compute BioHash. 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -462,8 +461,11 @@ I wish you the best of success.
  
 \hfill January 11, 2007
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\subsection{Homomorphic Encryption Scheme}
+Homomorphic encryption schemes allow us to carry  out  operations  on  the  ciphertext,  without
+decrypting it first and therefore without revealing the plaintext. 
+Homomorphic schemes can be multiplicatively homomorphic or additively homomorphic. If the scheme features both property it is called fully homomorphic otherwise named as partially homomorphic.
+ 
 
 
 \subsubsection{Subsubsection Heading Here}
@@ -596,10 +598,15 @@ The authors would like to thank...
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+  
+\bibitem{Ferrer2002} 
+Josep  Domingo-Ferrer.   A  provably  secure  additive  and  multiplicative
+privacy  homomorphism,\emph{Lecture  Notes  in  Computer  Science},  Volume 2433/2002:471–483, 2002
+\bibitem{Gentry2009} 
+Craig Gentry.  Fully Homomorphic Encryption Using Ideal Lattices. \emph{41st ACM Symposium on Theory of Computing (STOC)},
+2009.
+\bibitem{Paillier99}Pascal  Paillier. Public-key  cryptosystems  based  on  composite  degree
+residuosity classes. \emph{Advances in Cryptology EUROCRYPT’99}, 1999
 
 \end{thebibliography}
 
