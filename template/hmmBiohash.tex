@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+
 %% bare_conf.tex
+=======
+%% bae_conf.tex
+>>>>>>> d98119ee9b9847863ec363687d6e63781cc7a0d1
 %% V1.3
 %% 2007/01/11
 %% by Michael Shell
@@ -169,7 +174,7 @@
 
 % *** MATH PACKAGES ***
 %
-\usepackage[cmex10]{amsmath}
+%\usepackage[cmex10]{amsmath}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics. If using
 % it, be sure to load this package with the cmex10 option to ensure that
@@ -420,17 +425,14 @@ e-mail: berrin@sabanciuniv.edu.}}
 
 \begin{abstract}
 %\boldmath
+<<<<<<< HEAD
 This paper presents a novel approach to BioHashing with fingerprint minutiae so that user specified secret key is never revealed from the smart card. 
 This approach takes the advantage of homomorphic encryption scheme to jointly compute BioHash. 
+=======
 
-As the mobile applications have become an inseparable part of our daily lives, the necessity of reliable and secure authentication schemes has increased. 
-Since the mobile devices such as smart phones, tablets are considered as un-trusted environments, other trusted factors such as Trusted Execution Environment's (TEE) or Smart 
-Cards are considered as the security building blocks that complement the overall architecture. 
-TEE provides high computational power but needs a personalization step and also cannot be customized to one person if the mobile device is considered to serve as a multi user medium. 
-A Smart Card can be personalized for a user but its computational power is limited.
- In this paper, we introduce a fingerprint based biometric authentication scheme secured by a homomorphic cryptographic mechanism with the use of a smart card belonging to the person. 
+As the mobile applications have become an inseparable part of our daily lives, the necessity of reliable and secure authentication schemes has increased. Since the mobile devices such as smart phones, tablets are considered as un-trusted environments, other trusted factors such as Trusted Execution Environment's (TEE) or Smart Cards are considered as the security building blocks that complement the overall architecture. TEE provides high computational power but needs a personalization step and also cannot be customized to one person if the mobile device is considered to serve as a multi user medium. A Smart Card can be personalized for a user but its computational power is limited. In this paper, we introduce a fingerprint based biometric authentication scheme secured by a homomorphic cryptographic mechanism with the use of a smart card belonging to the person. 
 
- 
+>>>>>>> d98119ee9b9847863ec363687d6e63781cc7a0d1
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -470,36 +472,11 @@ I wish you the best of success.
 \hfill January 11, 2007
 
 \subsection{Homomorphic Encryption Scheme}
-Homomorphic encryption schemes allow us to carry  out  some operations  on  the  ciphertext,  without
+Homomorphic encryption schemes allow us to carry  out  operations  on  the  ciphertext,  without
 decrypting it first and therefore without revealing the plaintext. 
-If the cryptosystem supports arbitrary computation, e.g multiplication, addition or quadratic functions, on ciphertexts it is considered as fully homomorphic encryption scheme.
- If it features only one operation it is called as partially homomorphic. There are some well known homomorphic schemes that is already in use for many years. 
+Homomorphic schemes can be multiplicatively homomorphic or additively homomorphic. If the scheme features both property it is called fully homomorphic otherwise named as partially homomorphic.
  
-Definition
-Consider a cryptosystem C that has an encryption function $E$ and plaintext $m_i$ and ciphertext $c_i$ such that $E(m_i)$=$c_i$ on some operation $\circ$. 
-If the system holds the following relation it is called additively homomorphic\\
-\[
- \exists \circ E(m_1) \circ E(m_2) = E(m_1 +m_2 )
- \]
 
- 
-%pailler anlatılacak buraya girizgah olarak
-Pailler encryption scheme is defined as follows\\
-\textbf{Encryption:}
-\begin{align*}
-&\text{Plaintext  }  m < n\\
-&\text{Choose a random number  } 
- r < n\\
-&\text{Compute Ciphertext  } 
- c=g^m r^n \text{ mod } n^2\\ 
- \end{align*}
- 
-\textbf{Decryption:}
-\begin{align*}
-&\text{Ciphertext  }  c < n^2\\
-&\text{Compute plaintext  } 
- m =\frac{L(c^\lambda \text{ mod } n^2 )}{L(g^\lambda \text{ mod } n^2 )} \text{ mod } n \\
- \end{align*}
 
 \subsubsection{Subsubsection Heading Here}
 Subsubsection text here.
