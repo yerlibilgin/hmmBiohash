@@ -19,7 +19,7 @@
 %% Legal Notice:
 %% This code is offered as-is without any warranty either expressed or
 %% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% FITNESS FOR A PARTICULAR PURPOSE!
 %% User assumes all risk.
 %% In no event shall IEEE or any contributor to this code be liable for
 %% any damages or losses, including, but not limited to, incidental,
@@ -63,6 +63,14 @@
 % draft mode.
 %
 \documentclass[conference]{IEEEtran}
+\usepackage{amsfonts,amssymb,amsgen,amsopn,amsbsy,theorem,graphicx,epsfig}
+\usepackage{eufrak,amscd,bezier,latexsym,mathrsfs,enumerate}
+\usepackage{xcolor}
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+
+\usepackage{cryptocode}
+
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -146,7 +154,7 @@
 % graphicx was written by David Carlisle and Sebastian Rahtz. It is
 % required if you want graphics, photos, etc. graphicx.sty is already
 % installed on most LaTeX systems. The latest version and documentation can
-% be obtained at: 
+% be obtained at:
 % http://www.ctan.org/tex-archive/macros/latex/required/graphics/
 % Another good source of documentation is "Using Imported Graphics in
 % LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
@@ -168,8 +176,9 @@
 
 
 % *** MATH PACKAGES ***
-%
-\usepackage[cmex10]{amsmath}
+%%
+%\usepackage[cmex10]{amsmath}
+
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics. If using
 % it, be sure to load this package with the cmex10 option to ensure that
@@ -271,7 +280,7 @@
 % IEEEtran.cls handling of captions and this will result in nonIEEE style
 % figure/table captions. To prevent this problem, be sure and preload
 % caption.sty with its "caption=false" package option. This is will preserve
-% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later
 % (recommended due to many improvements over 1.2) of subfig.sty supports
 % the caption=false option directly:
 %\usepackage[caption=false,font=footnotesize]{subfig}
@@ -390,10 +399,10 @@ e-mail: berrin@sabanciuniv.edu.}}
 
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
-% 
+%
 %\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
 %Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
+%James Kirk\IEEEauthorrefmark{3},
 %Montgomery Scott\IEEEauthorrefmark{3} and
 %Eldon Tyrell\IEEEauthorrefmark{4}}
 %\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
@@ -420,17 +429,17 @@ e-mail: berrin@sabanciuniv.edu.}}
 
 \begin{abstract}
 %\boldmath
-This paper presents a novel approach to BioHashing with fingerprint minutiae so that user specified secret key is never revealed from the smart card. 
-This approach takes the advantage of homomorphic encryption scheme to jointly compute BioHash. 
+This paper presents a novel approach to BioHashing with fingerprint minutiae so that user specified secret key is never revealed from the smart card.
+This approach takes the advantage of homomorphic encryption scheme to jointly compute BioHash.
 
-As the mobile applications have become an inseparable part of our daily lives, the necessity of reliable and secure authentication schemes has increased. 
-Since the mobile devices such as smart phones, tablets are considered as un-trusted environments, other trusted factors such as Trusted Execution Environment's (TEE) or Smart 
-Cards are considered as the security building blocks that complement the overall architecture. 
-TEE provides high computational power but needs a personalization step and also cannot be customized to one person if the mobile device is considered to serve as a multi user medium. 
+As the mobile applications have become an inseparable part of our daily lives, the necessity of reliable and secure authentication schemes has increased.
+Since the mobile devices such as smart phones, tablets are considered as un-trusted environments, other trusted factors such as Trusted Execution Environment's (TEE) or Smart
+Cards are considered as the security building blocks that complement the overall architecture.
+TEE provides high computational power but needs a personalization step and also cannot be customized to one person if the mobile device is considered to serve as a multi user medium.
 A Smart Card can be personalized for a user but its computational power is limited.
- In this paper, we introduce a fingerprint based biometric authentication scheme secured by a homomorphic cryptographic mechanism with the use of a smart card belonging to the person. 
+ In this paper, we introduce a fingerprint based biometric authentication scheme secured by a homomorphic cryptographic mechanism with the use of a smart card belonging to the person.
 
- 
+
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -466,126 +475,251 @@ IEEEtran.cls version 1.7 and later.
 I wish you the best of success.
 
 \hfill mds
- 
+
 \hfill January 11, 2007
 
-\subsection{Homomorphic Encryption Scheme}
+\section{Homomorphic Encryption Scheme}
 Homomorphic encryption schemes allow us to carry  out  some operations  on  the  ciphertext,  without
-decrypting it first and therefore without revealing the plaintext. 
+decrypting it first and therefore without revealing the plaintext.
 If the cryptosystem supports arbitrary computation, e.g multiplication, addition or quadratic functions, on ciphertexts it is considered as fully homomorphic encryption scheme.
- If it features only one operation it is called as partially homomorphic. There are some well known homomorphic schemes that is already in use for many years. 
- 
+ If it features only one operation it is called as partially homomorphic. There are some well known homomorphic schemes that is already in use for many years~\cite{Ferrer2002, Gentry2009}.
+
 Definition
-Consider a cryptosystem C that has an encryption function $E$ and plaintext $m_i$ and ciphertext $c_i$ such that $E(m_i)$=$c_i$ on some operation $\circ$. 
+Consider a cryptosystem C that has an encryption function $E$ and plaintext $m_i$ and ciphertext $c_i$ such that $E(m_i)$=$c_i$ on some operation $\circ$.
 If the system holds the following relation it is called additively homomorphic\\
 \[
  \exists \circ E(m_1) \circ E(m_2) = E(m_1 +m_2 )
  \]
 
- 
+
 %pailler anlatılacak buraya girizgah olarak
 Pailler encryption scheme is defined as follows\\
 \textbf{Encryption:}
 \begin{align*}
 &\text{Plaintext  }  m < n\\
-&\text{Choose a random number  } 
+&\text{Choose a random number  }
  r < n\\
-&\text{Compute Ciphertext  } 
- c=g^m r^n \text{ mod } n^2\\ 
+&\text{Compute Ciphertext  }
+ c=g^m r^n \text{ mod } n^2\\
  \end{align*}
- 
+
 \textbf{Decryption:}
 \begin{align*}
 &\text{Ciphertext  }  c < n^2\\
-&\text{Compute plaintext  } 
+&\text{Compute plaintext  }
  m =\frac{L(c^\lambda \text{ mod } n^2 )}{L(g^\lambda \text{ mod } n^2 )} \text{ mod } n \\
  \end{align*}
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
 
 
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IEEEtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
+\section{Secure Biometric Hashing via Homomorphic Encryption}
 
-% Note that IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
+\subsection{Biometric Hashing}
+
+\begin{figure*}[h!]
+\begin{center}
+\includegraphics[width=0.7\linewidth]{figures/FIG1}
+\caption{Illustration of biometric hashing-based verification.}
+\label{fig2}
+\end{center}
+\end{figure*}
+
+Biometric hashing (simply biohashing) schemes are simple yet
+powerful biometric template protection methods~\cite{teoh2006, Bai, Karabat, Lumini, Rathgeb,Kuan}. Biohash is a binary and pseudo-random
+representation of a biometric template and biometric hashing schemes
+perform an automatic verification of a user based on his biohash (a
+binary string). Two inputs of a biometric hashing scheme are: i)
+biometric template and ii) user specific secret key. A biometric
+feature vector is transformed into another space using a
+pseudo-random set of vectors which are generated from the user's
+secret key. Then, the result is binarized to produce a pseudo-random
+bit-string which is called the biohash. The random projection matrix
+is unique and specific to each user and it can be stored in a USB
+token or a smartcard. In a practical system, a user specific random
+matrix is calculated using a seed (a user specific secret key) that
+is stored in a USB token or a smartcard microprocessor through a
+pseudo random number generator. The seed is the same with that used
+during the enrollment of a user and is different among different
+users and different applications~\cite{teoh2006}. This allows
+revocability of the subject's biohash in case it is compromised.
+Also, the same biometric trait of a subject can be used in different
+biometric recognition systems without constituting privacy threat as
+two biohashes of the same person with different keys are unlinkable.
+
+\subsubsection{Enrollment Stage}
+
+The first stage in a biometric recognition system is the enrollment
+stage in which a user is introduced to the system for the first
+time. His biometric record is captured and converted to a
+reference biometric template which will be compared to a fresh
+sample at the authentication stage. This biometric template can be
+stored either in a central database or a smart card that will be in
+possession of the user.
+
+\paragraph{Random Projection}
+
+In the first step, a pseudo random projection (RP) matrix,
+$\mathbf{R}\in\mathbb{R}^{k\times n}$, is generated to transform
+the biometric feature vector of the user. The RP matrix elements are independent
+and identically distributed (\textit{i.i.d}) and generated from a
+Gaussian distribution with zero mean and unit variance by using a
+Pseudo Random Number Generator (PRNG) with a seed derived from the
+user's secret key. The RP matrix projects the feature vector onto
+an $k$-dimensional space:
+
+\begin{equation}
+ \mathbf{y}=\mathbf{R}
+ \mathbf{x},
+\end{equation}
+where $\mathbf{y}\in\mathbb{R}^{k\times1}$ is an intermediate
+biohash vector.
+
+\paragraph{Quantization (Binarization)}
+
+In this step, elements of the intermediate biohash vector
+$\mathbf{y}$ are binarized with respect to a threshold:
+
+\begin{equation}
+b_i = \begin{cases}
+1, & y_i \geq \beta, \\
+0, & \text{otherwise},
+\end{cases}
+\end{equation}
+where $\mathbf{b}\in\ \left\{0,1\right\}^{k}$ denotes the biohash
+vector of the user and $\beta$ denotes the quantization threshold
+which can be 0 ($\text{sign}$ operator), the mean value of the
+intermediate biohash vector $\mathbf{y}$ or any other pre-determined threshold depending on the system
+design. After enrollment, biometric hashes are stored in a database or in a smart card.
+
+\subsubsection{Authentication Stage}
+
+During an authentication attempt, a claimer sends his biometric features
+$\tilde{\textbf{x}}$ and secret key to the system. The system computes the claimer's test biometric hash
+vector by using the same procedures in the enrollment phase. The
+user is authenticated when the Hamming distance between
+$\mathbf{b}_{enroll}$ (which denotes the biohash of the user
+generated at the enrollment stage) and $\mathbf{b}_{auth}$ (which
+denotes the biohash of the user generated at the authentication
+stage) is below a pre-determined distance threshold $\epsilon$ as
+follows:
+
+\begin{equation}
+\sum^{k}_{i=1}\mathbf{b}_{enroll}\left(i\right)\oplus\mathbf{b}_{auth}\left(i\right)\leq\epsilon
+\end{equation}
+where $\oplus$ denotes the binary XOR (exclusive OR) operator (Figure~\ref{fig2}).
 
 
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command, the
-% \label for the overall figure must come after \caption.
-% \hfil must be used as a separator to get equal spacing.
-% The subfigure.sty package works much the same way, except \subfigure is
-% used instead of \subfloat.
-%
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
+\subsection{Homomorphic Encryption}
+
+Homomorphic encryption concept enables the computation of overencrypted date without using the secret key. Although public-key encryption schemes that enable the performance of any kind of operations (fully homomorphic encryptions schemes) are proposed, they are still far from being used in real-life applications due to time and memory constraints. Therefore, partial homomorphic encryption cases are considered in this study.
+
+A public-key encryption scheme \emph{Enc} is said to be additively homomorphic if there exists an efficient operantion $\odot$, not depending on the secret key, such that, for any pair of plain texts $x_1$ and $x_2$:
+
+\begin{equation}
+Enc(x_1)\odot Enc(x_2)\equiv Enc(x_1 + x_2).
+\label{eqn4}
+\end{equation}
+
+The use of $\equiv$ means that the $\odot$ product of any pair of ciphertexts encrypting $x_1$ and $x_2$ is a ciphertext encrypting $x_1 + x_2$. An equality sign is not used since the encryption is randomized and many ciphertext encrypt the same plain text. For the sake of simplicity, we will use a $=$ symbol in the rest of this paper. Equation~\ref{eqn4} also implies that, with a multiplicative notation for $\odot$, for any message $x$ and integer $n$:
+
+\begin{equation}
+Enc(x)^n = Enc(n.x).
+\label{eqn5}
+\end{equation}
+
+The most widely used additively homomorphic scheme, especially in the proposals for secure biometric identification, is the Paillier cryptosystems~\cite{Paillier99}. For a plain text message of $k$-bit long, Paillier ciphertexts are $2k$-bit long and $\odot$ operations are multiplications modulo a $2k$-bit integer. To ensure short-term security, $k$ must be at least 1024, which is equivalent to a 80-bit symmetric encryption or a 1024-bit RSA encrpytion~\cite{Bringer2013}.
 
 
-% An example of a floating table. Note that, for IEEE style tables, the 
-% \caption command should come BEFORE the table. Table text will default to
-% \footnotesize as IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
+\subsection{Biohashing via Homomorphic Encryption}
+
+We assume that a biometric feature is represented by a vector $\mathbf{x}=[x_1, x_2, ..., x_i, ...]^T$ for $i=1,...,n$ (i.e. $\mathbf{x}\in\mathbb{R}^n$). Using the user specific random projection matrix $\mathbf{R}=[\mathbf{r}_1, \mathbf{r}_2, ..., \mathbf{r}_i, ...]^T$ for $i=1,...,k$ (i.e., $\mathbf{R}\in\mathbb{R}^{n\times k}$), input feature vector $\mathbf{x}$ is projected to the random space:
+
+%\begin{equation}
+%\mathbf{y} = \mathbf{R}\mathbf{x}\Rightarrow y_i=\mathbf{r}_i^T\mathbf{x}=r_{i1}x_1+r_{i2}x_2+...+r_{in}x_n.
+%\label{eqn6}
+%\end{equation}
+
+\begin{align}
+\mathbf{y}& =\mathbf{R}\mathbf{x}\\
+y_i& =\mathbf{r}_i^T\mathbf{x}\\
+&=r_{i1}x_1+r_{i2}x_2+...+r_{in}x_n.
+\label{eqn6}
+\end{align}
+
+The client homomorphically encrypts each component of the feature vector and sends the obtained ciphertexts $Enc(x_1),...,Enc(x_n)$ to the server. Then using the encrypted components of $\mathbf{x}$, the server computes the encrypted components of the intermediate biohash vector $\mathbf{y}$ as follows:
+
+%\begin{equation}
+%Enc(y_i) = Enc(r_{i1}x_1)\times Enc(r_{i2}x_2)\times\ldots\times Enc(r_{in}x_n)
+%\label{eqn7}
+%\end{equation}
+
+\begin{align}
+Enc(y_i) &= Enc(r_{i1}x_1 + r_{i2}x_2 + \ldots + r_{in}x_n)\\
+&= Enc(r_{i1}x_1)\times Enc(r_{i2}x_2)\times\ldots\times Enc(r_{in}x_n)\\
+&=Enc(x_1)^{r_{i1}}\times Enc(x_2)^{r_{i2}}\times\ldots\times Enc(x_n)^{r_{in}}.
+\label{eqn7}
+\end{align}
+
+Using the partial homomorphic properties, each encrypted component, $y_i$ is calculated in the encrypted domain and the encrypted intermediate biohash vector is obtained:
+
+\begin{equation}
+Enc(\mathbf{y}) = [Enc(y_1), Enc(y_2), \ldots, Enc(y_k)].
+\label{eqn8}
+\end{equation}
+
+The next step is to compare each component of $\mathbf{y}$ with a threshold. If $y_i$ is greater than the threshold, corresponding bit of the biohash $b_i$ will be assigned to 1, otherwise, to 0.
+
+\textcolor{red}{TAM OLARAK BU NOKTADA REAL VALUED $y_i$ ILE REAL VALUED THRESHOLDU KARSILASTIRIP BUYUKSE 1 KUCUKSE 0 OLARAK BIOHASHI OLUSTURACAGIZ.\\\\
+BU KARSILAŞSTIRMA ISLEMINI $Enc(y_i) \gtrless Enc(THR)$ NASIL YAPACAGIMIZI BULMA NOKTASINDAYIZ.\\\\
+EKLENECEKLER: BIOHASH PROTOKOL CIZIMI}
+
+\begin{figure*}
+\pseudocode{
+\textbf{User} \<\< \textbf{System} \\[][\hline]
+\\
+\text{compute $\{Enc(x_i)$}:i=1,\ldots,n\} \<\< \\
+\< \sendmessageright*{\text{$Enc(\mathbf{x})=[Enc(x_1), Enc(x_2),\ldots,Enc(x_n)]$}} \< \\
+\<\< \text{compute \{$Enc(x_i)^{r_{ji}}: i=1,\ldots,n; j=1,\ldots,k$\}} \\
+\<\< \text{$Enc(\mathbf{y})=[Enc(y_1), Enc(y_2),\ldots,Enc(y_k)]$} \\
+\<\< \text{compute \{$Enc(y_i)\gtrless Enc(THR_i):i=1,\ldots,k$\}} \\
+\<\< \text{$Enc(\mathbf{b})=[Enc(b_1), Enc(b_2),\ldots,Enc(b_k)]$} \\
+\<\< \text{Save $Enc(\mathbf{b}_{enroll})$ to database} \\
+\< \sendmessageleft*{\text{Response: Record saved to database}} \< \\
+}
+\caption{\textcolor{red}{Enrollment Flow (KABACA AKIS BU SEKILDE - TABI COK DAHA DETAYLI CIZERIZ)}}
+\end{figure*}
+
+\begin{figure*}
+\pseudocode{
+\textbf{User} \<\< \textbf{System} \\[][\hline]
+\\
+\text{compute $\{Enc(x_i)$}:i=1,\ldots,n\} \<\< \\
+\< \sendmessageright*{\text{$Enc(\mathbf{x})=[Enc(x_1), Enc(x_2),\ldots,Enc(x_n)]$}} \< \\
+\<\< \text{compute \{$Enc(x_i)^{r_{ji}}: i=1,\ldots,n; j=1,\ldots,k$\}} \\
+\<\< \text{$Enc(\mathbf{y})=[Enc(y_1), Enc(y_2),\ldots,Enc(y_k)]$} \\
+\<\< \text{compute \{$Enc(y_i)\gtrless Enc(THR_i):i=1,\ldots,k$\}} \\
+\<\< \text{$Enc(\mathbf{b})=[Enc(b_1), Enc(b_2),\ldots,Enc(b_k)]$} \\
+\\
+\<\< \text{calculate Hamming Distance between} \\
+\<\< \text{$Enc(\mathbf{b})$ and $Enc(\mathbf{b}_{enroll})$} \\
+\< \sendmessageleft*{\text{Authentication Result: Yes / No}} \< \\
+}
+\caption{\textcolor{red}{Authentication Flow (KABACA AKIS BU SEKILDE - TABI COK DAHA DETAYLI CIZERIZ)}}
+\end{figure*}
 
 
-% Note that IEEE does not put floats in the very first column - or typically
-% anywhere on the first page for that matter. Also, in-text middle ("here")
-% positioning is not used. Most IEEE journals/conferences use top floats
-% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
-% command of the stfloats package.
+%\procedure{My Protocol}{
+%\textbf{Alice} \> \> \textbf{Bob} \\
+%}
+
+%\p r o c e d u r e {My P r o t o c o l }{%
+%\ t e x t b f { A l i c e } \> \> \ t e x t b f {Bob} \\
+%b \samp le \ b in \> \> \\
+%\> \ s e n dm e s s a g e r i g h t ∗{\ t e x t { s end o v e r } b} \> \\
+%\> \> \ t e x t {do som eth ing } \\
+%\> \ s e n dm e s s a g e l e f t ∗{\ t e x t { s end o v e r s t h . e l s e }} \> \\
+%\ t e x t { f i n a l i z e } \> \> }
+
 
 
 
@@ -630,20 +764,18 @@ The authors would like to thank...
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-  
-\bibitem{Ferrer2002} 
-Josep  Domingo-Ferrer.   A  provably  secure  additive  and  multiplicative
-privacy  homomorphism,\emph{Lecture  Notes  in  Computer  Science},  Volume 2433/2002:471–483, 2002
-\bibitem{Gentry2009} 
-Craig Gentry.  Fully Homomorphic Encryption Using Ideal Lattices. \emph{41st ACM Symposium on Theory of Computing (STOC)},
-2009.
-\bibitem{Paillier99}Pascal  Paillier. Public-key  cryptosystems  based  on  composite  degree
-residuosity classes. \emph{Advances in Cryptology EUROCRYPT’99}, 1999
+%\begin{thebibliography}{1}
+%
+%\bibitem{Ferrer2002}
+%Josep  Domingo-Ferrer.   A  provably  secure  additive  and  multiplicative
+%privacy  homomorphism,\emph{Lecture  Notes  in  Computer  Science},  Volume 2433/2002:471–483, 2002
+%\bibitem{Gentry2009}
+%Craig Gentry.  Fully Homomorphic Encryption Using Ideal Lattices. \emph{41st ACM Symposium on Theory of Computing (STOC)},
+%2009.
+%\end{thebibliography}
 
-\end{thebibliography}
-
-
+\bibliographystyle{IEEEtran}
+\bibliography{hmmBiohash}
 
 
 % that's all folks
